@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="km">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pich Chanthorn | Personal Portfolio</title>
+  <meta name="description" content="Portfolio of Pich Chanthorn - IT Student and aspiring tech innovator." />
+  <link rel="icon" href="Logo1.png">
+  <style>
+    :root{
+      --bg:#0b1020; --bg-soft:#0f1530; --card:#0f1530; --text:#eaf0ff; --muted:#93a4cf; --brand:#4463ff; --accent:#7c5cff; --border:rgba(255,255,255,.08); --shadow:0 12px 30px rgba(0,0,0,.35); --radius:18px
+    }
+    @media (prefers-color-scheme: light){:root{--bg:#ffffff;--bg-soft:#f6f8ff;--card:#ffffff;--text:#162033;--muted:#5d6b8a;--brand:#1d4ed8;--accent:#7c3aed;--border:rgba(0,0,0,.08);--shadow:0 12px 30px rgba(0,0,0,.08)}}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans Khmer",Arial,"Helvetica Neue",sans-serif;line-height:1.6;scroll-behavior:smooth}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{width:min(1120px,92%);margin:0 auto}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:color-mix(in oklab,var(--bg) 85%,transparent);border-bottom:1px solid var(--border);transition:box-shadow .3s ease}
+    header.scrolled{box-shadow:var(--shadow)}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+    .logo{font-weight:800;letter-spacing:.2px}
+    .logo b{background:linear-gradient(90deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .nav a{margin-left:18px;color:var(--text);opacity:.85}
+    .nav a:hover{opacity:1}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--border);background:var(--bg-soft);border-radius:12px;box-shadow:var(--shadow);transform:translateY(0);transition:transform .25s ease,opacity .25s ease,background .25s ease}
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff;border:none}
+
+    /* Hero */
+    .hero{position:relative;padding:84px 0 48px;display:grid;grid-template-columns:1.25fr .75fr;gap:36px;align-items:center}
+    .tag{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:.9rem}
+    .hero h1{font-size:clamp(28px,4vw,46px);line-height:1.15;margin:12px 0}
+    .hero p{color:var(--muted);font-size:1.05rem}
+    .blob{position:absolute;right:-6%;width:42vmin;aspect-ratio:1;filter:blur(36px);background:radial-gradient(60% 60% at 50% 40%,color-mix(in oklab,var(--brand) 60%,transparent) 0,transparent 60%),radial-gradient(55% 55% at 60% 70%,color-mix(in oklab,var(--accent) 55%,transparent) 0,transparent 60%);opacity:.5;animation:float 10s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-16px) rotate(8deg)}}
+    .portrait{width:100%;aspect-ratio:1;border-radius:24px;background:radial-gradient(85% 85% at 70% 20%,color-mix(in oklab,var(--brand) 35%,transparent) 0,transparent 60%),var(--card);border:1px solid var(--border);box-shadow:var(--shadow);display:grid;place-items:center;overflow:hidden}
+    .portrait img{width:100%;height:100%;object-fit:cover}
+
+    /* Sections */
+    section{padding:64px 0;border-top:1px solid var(--border)}
+    h2{font-size:clamp(22px,3vw,30px);margin:0 0 14px}
+    .muted{color:var(--muted)}
+
+    /* Cards & grids */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .card{grid-column:span 4;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease,opacity .5s ease}
+    .card:hover{transform:translateY(-4px)}
+
+    .skills li{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:12px;margin:6px 8px 0 0;background:color-mix(in oklab,var(--bg) 85%,#fff 15%);font-size:.95rem}
+
+    .projects .prj{grid-column:span 6;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .25s ease}
+    .projects .prj:hover{transform:translateY(-4px)}
+    .prj img{width:100%;height:220px;object-fit:cover;display:block}
+    .prj .info{padding:16px}
+    .prj .info p{color:var(--muted)}
+
+    .socials{display:flex;gap:10px;flex-wrap:wrap}
+    .icon{width:22px;height:22px;opacity:.85}
+    .icon:hover{opacity:1}
+
+    footer{padding:28px 0;color:var(--muted)}
+
+    /* Scroll reveal */
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.show{opacity:1;transform:none}
+
+    /* Responsive */
+    @media (max-width: 900px){.hero{grid-template-columns:1fr}.projects .prj{grid-column:span 12}.card{grid-column:span 6}}
+    @media (max-width: 640px){.grid{grid-template-columns:repeat(6,1fr)}.card{grid-column:span 6}}
+  </style>
+</head>
+<body>
+  <header id="topbar">
+    <div class="container nav">
+      <div class="logo"><b>Pich Chanthorn</b> · Portfolio</div>
+      <nav>
+        <a href="#about">អំពីខ្ញុំ</a>
+        <a href="#skills">ជំនាញ</a>
+        <a href="#projects">គម្រោង</a>
+        <a href="#contact">ទាក់ទង</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <span class="blob" aria-hidden="true"></span>
+      <div class="reveal">
+        <span class="tag">IT Student · Future Tech Innovator</span>
+        <h1>សួស្តី! ខ្ញុំគឺ Pich Chanthorn</h1>
+        <p class="muted">Cultivating expertise in technology to contribute meaningfully to industry and society.</p>
+        <div style="display:flex; gap:12px; margin-top:14px">
+          <a class="btn primary" href="#projects">មើលគម្រោង</a>
+          <a class="btn" href="resume.pdf" download>ទាញយក Resume</a>
+        </div>
+        <div class="socials" style="margin-top:14px">
+          <a href="https://www.linkedin.com/in/pich-chanthorn/" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.84-2.2 3.8-2.2 4.06 0 4.8 2.67 4.8 6.14V24h-4v-6.44c0-1.54-.03-3.52-2.14-3.52-2.14 0-2.47 1.67-2.47 3.41V24h-3.84V8z"/></svg></a>
+          <a href="https://github.com/chanthornpich" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.98 5.25.98 11.52c0 4.86 3.16 8.98 7.55 10.44.55.1.75-.24.75-.53v-1.86c-3.07.67-3.72-1.32-3.72-1.32-.5-1.28-1.22-1.62-1.22-1.62-.99-.67.08-.66.08-.66 1.1.08 1.68 1.13 1.68 1.13.98 1.67 2.58 1.19 3.21.91.1-.71.38-1.19.69-1.47-2.45-.28-5.02-1.22-5.02-5.43 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.41.1-2.94 0 0 .93-.3 3.06 1.13a10.6 10.6 0 0 1 5.57 0c2.12-1.42 3.05-1.13 3.05-1.13.6 1.53.22 2.66.1 2.94.7.77 1.12 1.75 1.12 2.95 0 4.22-2.59 5.15-5.05 5.42.39.34.74 1.01.74 2.05v3.04c0 .29.2.64.76.53A10.98 10.98 0 0 0 23.02 11.5C23.02 5.24 18.27.5 12 .5z"/></svg></a>
+          <a href="https://web.facebook.com/chanthornpich.kh1" aria-label="Facebook"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S1.86 6.48 1.86 12.07c0 5.01 3.66 9.16 8.44 9.95v-7.03H7.9v-2.92h2.4V9.73c0-2.39 1.43-3.71 3.62-3.71 1.05 0 2.15.19 2.15.19v2.36h-1.21c-1.19 0-1.56.74-1.56 1.5v1.8h2.66l-.42 2.92h-2.24V22c4.78-.79 8.44-4.94 8.44-9.95z"/></svg></a>
+          <a href="https://x.com/chanthornpich" aria-label="X"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2H21l-6.54 7.47L22 22h-6.93l-4.33-5.65L5.6 22H3l6.99-7.98L2 2h7l4 5.39L18.244 2Zm-2.43 18h2.02L8.28 4h-2L15.814 20Z"/></svg></a>
+          <a href="https://www.instagram.com/chanthorn_pich/" aria-label="Instagram"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3h10zm-5 3.5A5.5 5.5 0 1 0 17.5 13 5.51 5.51 0 0 0 12 7.5zM18 6a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"/></svg></a>
+          <a href="https://t.me/ChanthornPICH" aria-label="Telegram"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9.04 15.8 8.8 19.6c.4 0 .6-.16.84-.36l2.02-1.7 4.18 3.07c.77.42 1.32.2 1.53-.72l2.76-12.9c.25-1.14-.41-1.58-1.17-1.3L3.4 9.5c-1.12.43-1.1 1.06-.2 1.34l4.9 1.53L18.7 6.8c.45-.27.86-.12.52.15"/></svg></a>
+        </div>
+      </div>
+      <div class="portrait reveal" aria-label="portrait">
+        <img src="5Y0A9534 copy.jpg" alt="Pich Chanthorn"/>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="reveal">
+      <h2>អំពីខ្ញុំ</h2>
+      <p class="muted">🎓 IT Student | Future Tech Innovator 💻<br>📌 Mission: To cultivate expertise in technology and make meaningful contributions to the industry and society.<br>💡 Interests: Software Development | Data Analysis | Technological Innovation<br>🏫 Current Role: IT Student at Build Bright University<br>🚀 Aspiration: Collaborate with leading technology firms to create innovative digital solutions.</p>
+      <p><strong>ទីតាំង:</strong> Tuol Sangke, Russey Keo, Phnom Penh · <strong>អ៊ីមែល:</strong> <a href="mailto:chanthornpich.kh@gmail.com">chanthornpich.kh@gmail.com</a></p>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="reveal">
+      <h2>ជំនាញ</h2>
+      <ul class="skills">
+        <li>Microsoft Word</li>
+        <li>Excel</li>
+        <li>Canva</li>
+        <li>PowerPoint</li>
+        <li>Internet Browsing</li>
+        <li>Email Communication</li>
+      </ul>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="projects reveal">
+      <h2>គម្រោងពិសេស</h2>
+      <div class="grid">
+        <article class="prj">
+          <img src="Logo1.png" alt="BBU Book Project Logo"/>
+          <div class="info">
+            <h3>BBU Book Project Team</h3>
+            <p>ក្រុមនិស្សិតដែលមានបំណងបង្កើតសៀវភៅសិក្សាគុណភាព និងចែករំលែកចំណេះដឹងតាមរយៈការសហការយ៉ាងមានវិជ្ជាជីវៈ។</p>
+            <div style="display:flex; gap:10px; flex-wrap:wrap">
+              <a href="https://t.me/bbuproject_team" class="btn">Telegram Group</a>
+              <a href="https://t.me/bbu_book_broject_team_updates" class="btn">Public Updates</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact reveal">
+      <h2>ទាក់ទងមកខ្ញុំ</h2>
+      <p>អ៊ីមែល: <a href="mailto:chanthornpich.kh@gmail.com">chanthornpich.kh@gmail.com</a> · ទូរស័ព្ទ: 0973100485</p>
+      <form name="contact" onsubmit="sendMessage(event)" style="display:grid; gap:12px; max-width:620px">
+        <input name="name" placeholder="ឈ្មោះ" required />
+        <input type="email" name="email" placeholder="អ៊ីមែល" required />
+        <textarea name="message" placeholder="សារ..."></textarea>
+        <button class="btn primary" type="submit">ផ្ញើសារ</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
+      <div>© <span id="year"></span> Pich Chanthorn · All Rights Reserved</div>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/pich-chanthorn/">LinkedIn</a> ·
+        <a href="https://github.com/chanthornpich">GitHub</a> ·
+        <a href="https://web.facebook.com/chanthornpich.kh1">Facebook</a> ·
+        <a href="https://x.com/chanthornpich">X</a> ·
+        <a href="https://www.instagram.com/chanthorn_pich/">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#top" id="toTop" class="btn" style="position:fixed; right:16px; bottom:16px; opacity:0; pointer-events:none">▲ កំពូល</a>
+
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // back-to-top + header shadow
+    const toTop = document.getElementById('toTop');
+    const header = document.getElementById('topbar');
+    window.addEventListener('scroll', () => {
+      const sc = window.scrollY || document.documentElement.scrollTop;
+      const show = sc > 320;
+      toTop.style.opacity = show ? 1 : 0;
+      toTop.style.pointerEvents = show ? 'auto' : 'none';
+      header.classList.toggle('scrolled', sc > 6);
+    });
+
+    // scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+      }
+    },{ threshold:.12 });
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // contact mailto
+    function sendMessage(e){
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      const mailto = `mailto:chanthornpich.kh@gmail.com?subject=New%20message%20from%20${encodeURIComponent(data.name)}&body=${encodeURIComponent(data.message + "\n\nEmail: " + data.email)}`;
+      window.location.href = mailto;
+    }
+  </script>
+</body>
+</html>
